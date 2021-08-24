@@ -1,18 +1,13 @@
 
+const URL_API = "http://localhost:50783//api/Usuario/";
+
    window.onload = function() {
         Obtener();
     };
 
-    function CrearNuevo(){
-        window.location = "Registro.html";
-    }
-
     function Obtener(){
 
-
-        const URL_API = "http://localhost:50783//api/Usuario";
-
-       // $(".table tbody").html("");
+       $(".table tbody").html("");
 
         $.get(URL_API)
         .done(function( response ) {
@@ -34,5 +29,29 @@
         });
     }
 
+    $(document).on('click', '.editar', function () {
+        console.log($(this).data("id"));
+        window.location = "Registro.html?id=" + $(this).data("id");
+        
+    });
+
+
+    $(document).on('click', '.eliminar', function () {
+        console.log($(this).data("id"));
+
+        $.ajax({
+        method: "DELETE",
+        url: URL_API + $(this).data("id")
+        })
+        .done(function( response ) {
+            console.log(response);
+            if(response){
+                Obtener();
+            }else{
+                alert("Error al eliminar")
+            }
+        });
+        
+    });
 
 
