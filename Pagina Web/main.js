@@ -3,7 +3,7 @@
         Obtener();
     };
 
-    function IrFormularioCrear(){
+    function CrearNuevo(){
         window.location = "Registro.html";
     }
 
